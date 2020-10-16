@@ -11,7 +11,6 @@ defmodule Exib.Application do
       # Starts a worker by calling: Exib.Worker.start_link(arg)
       # {Exib.Worker, arg}
       {Exib.AccountServ, []},
-      {Exib.DataServ, [%{"subscribed" => false}]}
       #%{
       #  id: Exib.AccountServ,
       #  start: {Exib.AccountServ, :init, [%{}]}

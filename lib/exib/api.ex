@@ -67,7 +67,39 @@
       data
     end
 
+    def get_options_contracts(conid, month, strike) do
+      contract_ids = ib_api_caller("iserver/secdef/info?conid=#{conid}&sectype=OPT&month=#{month}&strike=#{strike}")
+      contract_ids
+    end
+
     def get_orders() do
       ib_api_caller("iserver/account/orders")
+    end
+
+    def preview_order(order) do
+      ib_api_caller("iserver/account/#{Exib.AccountServ.id()}/order/whatif", order)
+    end
+
+    def place_order(order) do
+      IO.puts Jason.encode!(order)
+      response = ib_api_caller("iserver/account/#{Exib.AccountServ.id()}/order", order)
+      IO.puts Jason.encode!(response)
+      response
+    end
+
+    def place_orders(orders) do
+      ib_api_caller("iserver/account/#{Exib.AccountServ.id()}/orders", orders)
+    end
+
+    def reply_to_messages(replyid) do
+      IO.puts replyid
+      ib_api_caller("iserver/reply/#{replyid}",%{"confirmed" => true})
+    end
+
+    def place_and_confirm(order) do
+      [details | _] = Exib.Api.place_order(order)
+      %{"id" => id} = details
+      reply = Exib.Api.reply_to_messages(id)
+      {:ok, details, reply}
     end
 end

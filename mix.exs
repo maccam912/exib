@@ -24,7 +24,8 @@ defmodule Exib.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.6"},
-      {:jason, "~> 1.2"}
+      {:jason, "~> 1.2"},
+      { :elixir_uuid, "~> 1.2" }
     ]
   end
 end
