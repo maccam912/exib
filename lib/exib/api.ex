@@ -88,7 +88,7 @@
     end
 
     def place_orders(orders) do
-      ib_api_caller("iserver/account/#{Exib.AccountServ.id()}/orders", orders)
+      ib_api_caller("iserver/account/#{Exib.AccountServ.id()}/orders", %{"orders" => orders})
     end
 
     def reply_to_messages(replyid) do

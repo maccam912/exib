@@ -9,7 +9,8 @@ defmodule Exib.Order do
   end
 
   def set_parent(order, parentId) do
-    Map.put(order, "parentId", parentId)
+    o = Map.put(order, "parentId", parentId)
+    Map.delete(o, "cOID")
   end
 
 end
