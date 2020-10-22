@@ -8,9 +8,9 @@ defmodule Exib.Application do
   @spec start(any, any) :: {:error, any} | {:ok, pid}
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Exib.Worker.start_link(arg)
-      # {Exib.Worker, arg}
       {Exib.AccountServ, []},
+      #{Exib.Ws, []},
+      #{Exib.OptionProtection, {"AMD", 81.55, :sell}},
       #%{
       #  id: Exib.AccountServ,
       #  start: {Exib.AccountServ, :init, [%{}]}
