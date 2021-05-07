@@ -90,14 +90,8 @@ defmodule Exib.Api do
   end
 
   def get_history_from_contract(conid) do
-    %HTTPoison.Response{body: body} =
-      HTTPoison.get!(
-        "#{Exib.baseurl()}/iserver/marketdata/history?conid=#{conid}&period=1y&bar=1d&outsideRth=true",
-        [],
-        Exib.options()
-      )
-
-    %{"data" => data} = Jason.decode!(body)
+    %{"data" => data} =
+      ib_api_caller("iserver/marketdata/history?conid=#{conid}&period=1y&bar=1d&outsideRth=true")
 
     data
     |> Stream.map(fn candle ->
