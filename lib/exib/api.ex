@@ -84,6 +84,14 @@ defmodule Exib.Api do
     ib_api_caller("iserver/secdef/search", %{"symbol" => symbol})
   end
 
+  def search_futures_contract(symbol) do
+    ib_api_caller("trsrv/futures?symbols=#{symbol}")
+  end
+
+  def get_contract_info(conid) do
+    ib_api_caller("iserver/contract/#{conid}/info")
+  end
+
   def get_history_from_symbol(symbol) do
     [%{"conid" => conid} | _] = ib_api_caller("iserver/secdef/search", %{"symbol" => symbol})
     get_history_from_contract(conid)
