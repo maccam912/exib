@@ -16,7 +16,10 @@ defmodule Exib.MixProject do
     [
       extra_applications: [:logger, :httpoison, :gun],
       mod: {Exib.Application, []},
-      env: [baseurl: "https://localhost:5000/v1/portal", options: [ssl: [{:verify, :verify_none}], recv_timeout: 10000]]
+      env: [
+        baseurl: "https://localhost:5000/v1/portal",
+        options: [hackney: [:insecure], ssl: [{:verify, :verify_none}], recv_timeout: 10000]
+      ]
     ]
   end
 
@@ -25,8 +28,8 @@ defmodule Exib.MixProject do
     [
       {:httpoison, "~> 1.6"},
       {:jason, "~> 1.2"},
-      {:elixir_uuid, "~> 1.2" },
-      {:gun, "~> 1.3"},
+      {:elixir_uuid, "~> 1.2"},
+      {:gun, "~> 1.3"}
     ]
   end
 end

@@ -48,24 +48,18 @@ defmodule ExibTest do
   end
 
   test "account positions" do
-    [%{"mktValue" => mktValue} | _]= Exib.Api.get_account_positions()
+    [%{"mktValue" => mktValue} | _] = Exib.Api.get_account_positions()
     assert mktValue != 0
   end
 
-  test "dataserv unsubscribe" do
-    Exib.DataServ.unsubscribe()
-    subbed = Exib.DataServ.is_subscribed()
-    assert not subbed
-  end
-
   test "search" do
-    [%{"conid" => conid} | _ ] = Exib.Api.search_contract("AMD")
+    [%{"conid" => conid} | _] = Exib.Api.search_contract("AMD")
     assert conid == 4391
   end
 
   test "history" do
-    [%{"c" => last_price} | _] = Exib.Api.get_history("AMD")
-    assert last_price < 84
-    assert last_price > 83
+    [%{"c" => last_price} | _] = Exib.Api.get_history_from_symbol("AMD")
+    assert last_price < 1000
+    assert last_price > 0
   end
 end

@@ -1,5 +1,4 @@
 defmodule Exib.Trader do
-
   def options_scalper(symbol, strike, bracket_amount) do
     # Step 1: Get contract ID for stock and first opt month
     [%{"conid" => conid, "sections" => sections} | _] = Exib.Api.search_contract(symbol)
@@ -18,8 +17,8 @@ defmodule Exib.Trader do
 
     buy_OID = UUID.uuid4()
     sell_OID = UUID.uuid4()
-    underlying_buy = Exib.Order.limit_order(conid, "BUY", 30, strike-bracket_amount, buy_OID)
-    underlying_sell = Exib.Order.limit_order(conid, "SELL", 30, strike+bracket_amount, sell_OID)
+    underlying_buy = Exib.Order.limit_order(conid, "BUY", 30, strike - bracket_amount, buy_OID)
+    underlying_sell = Exib.Order.limit_order(conid, "SELL", 30, strike + bracket_amount, sell_OID)
 
     underlying_buy_close_raw = Exib.Order.limit_order(conid, "SELL", 30, strike)
     underlying_buy_close = Exib.Order.set_parent(underlying_buy_close_raw, buy_OID)

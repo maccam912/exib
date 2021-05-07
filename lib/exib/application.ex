@@ -8,10 +8,10 @@ defmodule Exib.Application do
   @spec start(any, any) :: {:error, any} | {:ok, pid}
   def start(_type, _args) do
     children = [
-      {Exib.AccountServ, []},
-      #{Exib.Ws, []},
-      #{Exib.OptionProtection, {"AMD", 81.55, :sell}},
-      #%{
+      {Exib.AccountServ, []}
+      # {Exib.Ws, []},
+      # {Exib.OptionProtection, {"AMD", 81.55, :sell}},
+      # %{
       #  id: Exib.AccountServ,
       #  start: {Exib.AccountServ, :init, [%{}]}
       # }

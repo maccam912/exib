@@ -1,7 +1,7 @@
 defmodule Exib.AccountServ do
   use GenServer
 
-  @refreshInterval 60000
+  @refreshInterval 30000
 
   def id() do
     GenServer.call(__MODULE__, :account)
@@ -28,12 +28,12 @@ defmodule Exib.AccountServ do
   end
 
   def handle_cast(:refresh, _st) do
-    [%{"accountId" => accountId}] = Exib.Api.get_accounts()
+    [%{"accountId" => accountId} | _] = Exib.Api.get_accounts()
     {:noreply, %{:accountId => accountId}}
   end
 
   def handle_cast(:tickle, st) do
-    Exib.Api.tickle()
+    Exib.Api.reauthenticate()
     Process.send_after(self(), :tickle, @refreshInterval)
     {:noreply, st}
   end
@@ -41,5 +41,4 @@ defmodule Exib.AccountServ do
   def handle_info(:tickle, st) do
     handle_cast(:tickle, st)
   end
-
 end
