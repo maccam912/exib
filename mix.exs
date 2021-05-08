@@ -28,8 +28,6 @@ defmodule Exib.MixProject do
     [
       {:httpoison, "~> 1.6"},
       {:jason, "~> 1.2"},
-      {:elixir_uuid, "~> 1.2"},
-      {:gun, "~> 1.3"}
-    ]
+      {:elixir_uuid, "~> 1.2"},    ]
   end
 end
